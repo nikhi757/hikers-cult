@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hikers Cult – Wild Treks. Strong Cult.</title>
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #054d2b;
+      --sun: #f7c948;
+      --sky: #e8f5e9;
+      --white: #fff;
+      --gray: #f4f4f4;
+      --text-dark: #222;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--gray);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--forest); color: var(--white);
+      padding: 1rem 2rem; display: flex;
+      justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow);
+    }
+    header h1 { font-size: 2rem; font-weight: 700; }
+    nav { display: flex; align-items: center; }
+    nav a { color: var(--white); margin-left: 1.5rem; text-decoration: none; font-weight: 600; transition: opacity 0.3s ease; }
+    nav a:hover { opacity: 0.85; }
+    .menu-toggle { display: none; background: none; border: none; color: var(--white); font-size: 1.5rem; margin-left: 1rem; }
+    .mobile-nav { display: none; flex-direction: column; background: var(--forest); }
+    .mobile-nav a { padding: 1rem; border-top: 1px solid #fff2; }
+
+    .hero {
+      min-height: 100vh;
+      background: url('images/western-ghats.jpg') center center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; color: var(--white); position: relative;
+      transition: background-image 1s ease-in-out;
+    }
+    .hero::after {
+      content: ""; position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; background: rgba(0,0,0,0.45);
+    }
+    .hero-content {
+      position: relative; z-index: 1; padding: 2rem;
+      border-radius: 10px; animation: slideIn 1s ease-out forwards; opacity: 0;
+    }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+    .hero-content h1 { font-size: 4rem; color: #f7b80a; letter-spacing: 2px; }
+    .hero-content p { font-size: 1.5rem; margin-top: 0.5rem; }
+    .cta-btn {
+      display: inline-block; background: var(--sun); color: #000;
+      padding: 0.75rem 1.75rem; font-size: 1rem;
+      border-radius: 50px; font-weight: 600; text-decoration: none;
+      margin-top: 1.5rem; transition: all 0.3s ease;
+    }
+    .cta-btn:hover { background: #e3b322; }
+    .section { padding: 4rem 2rem; background: var(--white); }
+    .section h2 { text-align: center; font-size: 2.5rem; color: var(--forest); margin-bottom: 2rem; }
+    .treks { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
+    .trek-card {
+      background: var(--sky); border-radius: 12px; padding: 2rem;
+      width: 300px; box-shadow: var(--shadow); transition: transform 0.3s ease; cursor: pointer;
+    }
+    .trek-card:hover { transform: translateY(-5px); }
+    .trek-card img.trek-image { width: 100%; height: 180px;object-fit: cover; border-radius: 10px; margin-bottom: 1rem; }
+    .trek-card h3 { margin-bottom: 0.5rem; color: var(--forest); font-size: 1.25rem; }
+    .trek-card p { margin: 0.3rem 0; }
+    .centered-text { max-width: 800px; margin: 0 auto; list-style: none; padding: 0; }
+    .centered-text li { margin-bottom: 1rem; font-size: 1.1rem; line-height: 1.5; }
+    form { max-width: 500px; margin: 2rem auto 0; display: flex; flex-direction: column; gap: 1rem; }
+    input, textarea { padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; }
+    button[type="submit"] { background: var(--sun); border: none; padding: 0.75rem; font-weight: 600; border-radius: 50px; cursor: pointer; }
+    footer { background: var(--forest); color: var(--white); text-align: center; padding: 1.5rem; font-size: 0.95rem; }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .menu-toggle { display: block; }
+      .mobile-nav.active { display: flex; }
+      .hero-content h1 { font-size: 2.5rem; }
+      .treks { flex-direction: column; align-items: center; }
+    }
+    /* Modal Styles */
+    .modal {
+      display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center;
+    }
+    .modal-content {
+      background: var(--white); padding: 2rem; border-radius: 10px; max-width: 500px;
+      box-shadow: var(--shadow);
+    }
+    .close-btn {
+      background: var(--forest); color: var(--white); border: none; padding: 0.5rem 1rem;
+      border-radius: 5px; cursor: pointer; float: right;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hikers Cult</h1>
+    <nav>
+      <a href="#featured-treks">Treks</a>
+      <a href="#why-choose">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  </header>
+  <div class="mobile-nav" id="mobileMenu">
+    <a href="#featured-treks">Treks</a>
+    <a href="#why-choose">Why Us</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1>Hikers Cult</h1>
+      <p>Wild Treks. Strong Cult.</p>
+      <a class="cta-btn" href="#featured-treks">Explore Treks</a>
+    </div>
+  </section>
+
+  <section class="section" id="featured-treks">
+    <h2>Featured Treks</h2>
+    <div class="treks">
+      <div class="trek-card" data-trek="kudremukh">
+        <img src="images/kudremukh.jpg" alt="Kudremukh Trek" class="trek-image" />
+        <h3>Kudremukh Trek</h3>
+        <p>Scenic mountain ranges, rolling hills, and dense forests in the Western Ghats.</p>
+      </div>
+      <div class="trek-card" data-trek="kodachadri">
+        <img src="images/kodachadri.jpg" alt="Kodachadri Trek" class="trek-image" />
+        <h3>Kodachadri Trek</h3>
+        <p>Spiritual peaks and stunning sunset views at one of Karnataka's highest points.</p>
+      </div>
+      <div class="trek-card" data-trek="merthi">
+        <img src="images/merthi.jpg" alt="Merthi Gudda Trek" class="trek-image" />
+        <h3>Merthi Gudda Trek</h3>
+        <p>Untouched and raw terrain with misty mountain beauty and solitude.</p>
+      </div>
+      <div class="trek-card" data-trek="netravathi">
+        <img src="images/netravathi.jpg" alt="Netravathi Trek" class="trek-image" />
+        <h3>Netravathi Trek</h3>
+        <p>Challenging trails, mist-laden forests, and river crossings near Kudremukh.</p>
+      </div>
+      <div class="trek-card" data-trek="kurinjal">
+        <img src="images/kurinjal.jpg" alt="Kurinjal Trek" class="trek-image" />
+        <h3>Kurinjal Trek</h3>
+        <p>Lush Shola forests and grasslands with panoramic views near Kudremukh.</p>
+      </div>
+      <div class="trek-card" data-trek="gangadikal">
+        <img src="images/gangadikal.jpg" alt="Gangadikal Trek" class="trek-image" />
+        <h3>Gangadikal Trek</h3>
+        <p>Offbeat and peaceful trail offering an immersive forest experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trek Details Modal -->
+  <div class="modal" id="trekModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">Close</button>
+      <h2 id="trekTitle"></h2>
+      <p id="trekDescription"></p>
+      <ul id="trekDetails"></ul>
+    </div>
+  </div>
+
+  <section class="section" id="why-choose">
+    <h2>Why Choose Hikers Cult?</h2>
+    <ul class="centered-text">
+      <li>✅ No-Compromise Safety Protocols – Certified leaders, first-aid & oxygen kits</li>
+      <li>✅ Sustainable Trek Practices – Leave No Trace, local support & eco-conscious</li>
+      <li>✅ Local Expertise – Western Ghats trails curated by experienced guides</li>
+      <li>✅ Small Group Sizes – Personalized experiences and deeper bonding</li>
+    </ul>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact Us</h2>
+    <p style="text-align: center; font-size: 1.1rem;">📞 +91 98765 43210 &nbsp;|&nbsp; 📧 contact@hikerscult.in</p>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="4" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Hikers Cult. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const toggleMenu = () => {
+      document.getElementById('mobileMenu').classList.toggle('active');
+    };
+
+    const hero = document.getElementById('hero');
+    const images = [
+      'images/western-ghats.jpg',
+      'images/kudremukh.jpg',
+      'images/kodachadri.jpg',
+      'images/merthi.jpg',
+      'images/netravathi.jpg',
+      'images/kurinjal.jpg'
+    ];
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      hero.style.backgroundImage = `url('${images[index]}')`;
+    }, 3000);
+
+    const trekInfo = {
+      kudremukh: {
+        title: "Kudremukh Trek",
+        description: "Explore rolling green hills, misty forests, and breathtaking views of the Western Ghats.",
+        details: [
+          "📏 Distance: 18 km",
+          "🥾 Difficulty: Moderate",
+          "⏳ Duration: 1 Day",
+          "☀️ Best Season: October – February"
+        ]
+      },
+      kodachadri: {
+        title: "Kodachadri Trek",
+        description: "A spiritual and scenic journey to the peak with mesmerizing sunsets.",
+        details: [
+          "📏 Distance: 14 km",
+          "🥾 Difficulty: Moderate to Difficult",
+          "⏳ Duration: 1 Day",
+          "☀️ Best Season: September – January"
+        ]
+      },
+      merthi: {
+        title: "Merthi Gudda Trek",
+        description: "Untouched trails with serene mountain landscapes.",
+        details: [
+          "📏 Distance: 12 km",
+          "🥾 Difficulty: Easy to Moderate",
+          "⏳ Duration: 1 Day",
+          "☀️ Best Season: November – February"
+        ]
+      },
+      netravathi: {
+        title: "Netravathi Trek",
+        description: "Adventure-filled trek with river crossings and dense forests.",
+        details: [
+          "📏 Distance: 20 km",
+          "🥾 Difficulty: Difficult",
+          "⏳ Duration: 2 Days",
+          "☀️ Best Season: October – March"
+        ]
+      },
+      kurinjal: {
+        title: "Kurinjal Trek",
+        description: "Lush grasslands and panoramic views near Kudremukh.",
+        details: [
+          "📏 Distance: 10 km",
+          "🥾 Difficulty: Moderate",
+          "⏳ Duration: 1 Day",
+          "☀️ Best Season: November – February"
+        ]
+      },
+      gangadikal: {
+        title: "Gangadikal Trek",
+        description: "Offbeat trail with peaceful forest surroundings.",
+        details: [
+          "📏 Distance: 15 km",
+          "🥾 Difficulty: Moderate",
+          "⏳ Duration: 1 Day",
+          "☀️ Best Season: October – February"
+        ]
+      }
+    };
+
+    const modal = document.getElementById('trekModal');
+    const trekTitle = document.getElementById('trekTitle');
+    const trekDescription = document.getElementById('trekDescription');
+    const trekDetails = document.getElementById('trekDetails');
+
+    document.querySelectorAll('.trek-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const trekKey = card.getAttribute('data-trek');
+        const trek = trekInfo[trekKey];
+        trekTitle.textContent = trek.title;
+        trekDescription.textContent = trek.description;
+        trekDetails.innerHTML = trek.details.map(d => `<li>${d}</li>`).join('');
+        modal.style.display = 'flex';
+      });
+    });
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  </script>
+</body>
+</html>
