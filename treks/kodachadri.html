@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kudremukh Trek – Hikers Cult</title>
+  <link rel="icon" type="image/png" href="../images/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+      color: #333;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 30px;
+      z-index: 10;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+    }
+
+    .hero {
+      height: 70vh;
+      background: url('../images/kodachadri.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .hero h1, .hero p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .hero p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+    }
+
+    .section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .section h3 {
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      color: #2a4d69;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .section ul li {
+      background: #f9f9f9;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-weight: 500;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .details-list {
+      list-style: disc;
+      margin: 10px 0 20px 20px;
+      padding: 0;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item img:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: white;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .gallery-item img {
+        height: 180px;
+      }
+    }
+    .itinerary p {
+      margin: 8px 0;
+      padding: 10px 15px;
+      background: #f4f8fb;
+      border-left: 4px solid #2a4d69;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><a href="../index.html" style="color:white; text-decoration:none;">Hikers Cult</a></div>
+  </header>
+
+  <section class="hero">
+    <h1>Kodachadri Trek</h1>
+    <p>Rolling green hills, misty forests & breathtaking Western Ghats views</p>
+  </section>
+
+  <section class="section">
+    <h2>About the Trek</h2>
+    <ul>
+      <li>📏 Distance: 18 km</li>
+      <li>🥾 Difficulty: Moderate</li>
+      <li>⏳ Duration: 1 Day</li>
+      <li>☀️ Best Season: October – February</li>
+    </ul>
+
+    <h3>Itinerary</h3>
+    <div class="itinerary">
+      <p>🕔 5:00 AM – Departure from Bangalore</p>
+      <p>🍽️ 8:30 AM – Reach Kudremukh base village, breakfast & briefing</p>
+      <p>🥾 9:30 AM – Start trek through lush forests & streams</p>
+      <p>⛰️ 1:00 PM – Reach Kudremukh Peak, lunch & relaxation</p>
+      <p>⬇️ 2:30 PM – Descend back via scenic trail</p>
+      <p>🚐 6:00 PM – Reach base village, freshen up</p>
+      <p>🌃 10:00 PM – Arrive back in Bangalore</p>
+    </div>
+
+    <h3>Inclusions</h3>
+    <ul class="details-list">
+      <li>✔️ Transport (Bangalore ↔ Kudremukh)</li>
+      <li>✔️ Breakfast & Packed Lunch</li>
+      <li>✔️ Forest Permits & Entry Fees</li>
+      <li>✔️ Experienced Trek Leads</li>
+      <li>✔️ First Aid Support</li>
+    </ul>
+
+    <h3>Exclusions</h3>
+    <ul class="details-list">
+      <li>❌ Personal expenses</li>
+      <li>❌ Dinner during return</li>
+      <li>❌ Any kind of insurance</li>
+      <li>❌ Anything not mentioned in Inclusions</li>
+    </ul>
+
+    <h3 style="text-align:center;">Photo Memories</h3>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="../images/trip1.jpeg" alt="Kudremukh Trek Photo 1"></div>
+      <div class="gallery-item"><img src="../images/trip2.jpeg" alt="Kudremukh Trek Photo 2"></div>
+      <div class="gallery-item"><img src="../images/trip3.jpeg" alt="Kudremukh Trek Photo 3"></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Hikers Cult. All rights reserved.</p>
+  </footer>
+</body>
+</html>
